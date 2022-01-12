@@ -18,16 +18,10 @@ const createTaskHTML = (description, status) => {
   const taskContainer = document.createElement('li');
   taskContainer.classList.add('task');
 
-  const statusIcon = new Image();
-  if (status) {
-    statusIcon.src = checkIcon;
-    statusIcon.setAttribute('alt', 'check-icon');
-  } else {
-    statusIcon.src = boxIcon;
-    statusIcon.setAttribute('alt', 'checkbox-icon');
-  }
-  statusIcon.classList.add('check-box');
-  taskContainer.appendChild(statusIcon);
+  const checkbox = document.createElement('input');
+  checkbox.setAttribute('type', 'checkbox');
+  checkbox.classList.add('check-box');
+  taskContainer.appendChild(checkbox);
 
   const descriptionContainer = document.createElement('p');
   descriptionContainer.classList.add('description');
@@ -37,7 +31,7 @@ const createTaskHTML = (description, status) => {
   const menuIcon = new Image();
   menuIcon.src = moreIcon;
   menuIcon.setAttribute('alt', 'menu-icon');
-  menuIcon.classList.add('more-icon', 'check-box');
+  menuIcon.classList.add('more-icon');
   taskContainer.appendChild(menuIcon);
 
   tasksInnerContainer.appendChild(taskContainer);
@@ -49,6 +43,15 @@ const displayTasks = (array) => {
   }
 };
 
+let tasksContainer = [
+  new Task('desc1', false, 1),
+  new Task('desc4', false, 4),
+  new Task('desc7', false, 7),
+  new Task('desc2', false, 2),
+  new Task('desc3', false, 3),
+  new Task('desc5', false, 5),
+  new Task('desc6', false, 6),
+];
 
 const upwardOrderArray = (array) => {
   for (let i = 0; i < array.length - 1; i += 1) {
@@ -79,16 +82,6 @@ const setEnterIcon = () => {
   formContainer.appendChild(enIcon);
 };
 
-let tasksContainer = [
-  new Task('desc1', false, 1),
-  new Task('desc4', false, 4),
-  new Task('desc7', false, 7),
-  new Task('desc2', false, 2),
-  new Task('desc3', false, 3),
-  new Task('desc5', false, 5),
-  new Task('desc6', false, 6),
-];
-
 setEnterIcon();
 setReloadIcon();
 tasksContainer = upwardOrderArray(tasksContainer);
@@ -96,9 +89,3 @@ tasksContainer = upwardOrderArray(tasksContainer);
 window.onload = () => {
   displayTasks(tasksContainer);
 };
-
-// ----------------------------------------------------------------------------------------
-
-const addTask = (description) => {
-  
-}

@@ -1,6 +1,4 @@
 import './style.css';
-import checkIcon from './check.png';
-import boxIcon from './blank-check-box.png';
 import moreIcon from './more.png';
 import reloadIcon from './reload.png';
 import enterIcon from './enter.png';
@@ -13,7 +11,7 @@ class Task {
   }
 }
 
-const createTaskHTML = (description, status) => {
+const createTaskHTML = (description) => {
   const tasksInnerContainer = document.querySelector('.task-inner-container');
   const taskContainer = document.createElement('li');
   taskContainer.classList.add('task');

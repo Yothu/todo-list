@@ -2,17 +2,13 @@ import './style.css';
 import moreIcon from './more.png';
 import reloadIcon from './reload.png';
 import enterIcon from './enter.png';
-import {getTasksLocalStorage, addTask, deleteCompletedTasks, setTasksLocalStorage, modifyTask} from './crud-module';
+import {
+  getTasksLocalStorage, addTask, deleteCompletedTasks, setTasksLocalStorage, modifyTask,
+} from './crud-module';
 
-export class Task {
-  constructor(description, completed = false, index) {
-    this.description = description;
-    this.completed = completed;
-    this.index = index;
-  }
-}
+let tasksContainer = getTasksLocalStorage();
 
-export const createTaskHTML = (description) => {
+const createTaskHTML = (description) => {
   const tasksInnerContainer = document.querySelector('.task-inner-container');
   const taskContainer = document.createElement('li');
   taskContainer.classList.add('task');
@@ -29,7 +25,7 @@ export const createTaskHTML = (description) => {
   taskContainer.appendChild(descriptionContainer);
 
   descriptionContainer.addEventListener('change', () => {
-    tasksContainer = modifyTask(descriptionContainer);
+    tasksContainer = modifyTask(descriptionContainer, tasksContainer);
     setTasksLocalStorage(tasksContainer);
   });
 
@@ -90,8 +86,6 @@ const setEnterIcon = () => {
 setEnterIcon();
 setReloadIcon();
 
-export let tasksContainer = getTasksLocalStorage();
-
 window.onload = () => {
   if (tasksContainer != null) {
     tasksContainer = upwardOrderArray(tasksContainer);
@@ -101,24 +95,20 @@ window.onload = () => {
   }
 };
 
-// ----------------------------------------------------------------------------------------------------------------------
-
 const enterButton = document.getElementById('enterForm');
-const reloadButton = document.getElementById('reloadButton');
 const clearButton = document.getElementById('clearButton');
-
-reloadButton.addEventListener('click', () => {
-  console.log('tasksContainer', tasksContainer);
-});
 
 enterButton.addEventListener('click', () => {
   const newDescription = document.getElementById('taskForm').value;
-  addTask(newDescription);
-  document.getElementById('taskForm').value = "";
+  const newTask = addTask(newDescription, tasksContainer);
+  createTaskHTML(newTask.description);
+  document.getElementById('taskForm').value = '';
 });
 
 clearButton.addEventListener('click', () => {
   const checkBoxes = document.querySelectorAll('.statusBox');
-  tasksContainer = deleteCompletedTasks(checkBoxes);
+
+  tasksContainer = deleteCompletedTasks(checkBoxes, tasksContainer);
+
   setTasksLocalStorage(tasksContainer);
 });

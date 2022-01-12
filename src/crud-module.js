@@ -1,67 +1,65 @@
-import {Task, tasksContainer, createTaskHTML} from './index';
+export class Task {
+  constructor(description, completed = false, index) {
+    this.description = description;
+    this.completed = completed;
+    this.index = index;
+  }
+}
 
 export const setTasksLocalStorage = (tasksContainer) => {
   localStorage.setItem('tasksContainer', JSON.stringify(tasksContainer));
-}
+};
 
-export const getTasksLocalStorage = () => {
-  return JSON.parse(localStorage.getItem('tasksContainer'));
-}
+export const getTasksLocalStorage = () => JSON.parse(localStorage.getItem('tasksContainer'));
 
-export const displaySingleTask = (task) => {
-  createTaskHTML(task.description, task.completed);
-}
-
-export const addTask = (description) => {
+export const addTask = (description, tasksContainer) => {
   const newTask = new Task(description, false, tasksContainer.length);
   tasksContainer.push(newTask);
   setTasksLocalStorage(tasksContainer);
-  displaySingleTask(newTask);
-}
-
-export const deleteCompletedTasks = (checkboxes) => {
-  const tasksInnerContainer = document.querySelector('.task-inner-container');
-  const tasks = tasksInnerContainer.children;
-  let tCont = tasksContainer;
-
-  for (const box of checkboxes) {
-    if (box.checked) {
-      for (let i = 0; i < tasks.length; i += 1) {
-        if (tasks[i] == box.parentElement) {
-          tCont = deleteTask(i, tCont);
-          tasks[i].remove();
-          break;
-        }
-      }
-    }
-  }
-  return tCont;
-}
+  return newTask;
+};
 
 export const deleteTask = (index, tCont) => {
   let change = false;
   for (let i = 0; i < tCont.length; i += 1) {
     if (change) {
       tCont[i].index -= 1;
-    } else {
-      if (i == index) {
-        tCont = tCont.filter((task) => task.index !== index);
-        change = true;
-        i -= 1;
-      }
+    } else if (i === index) {
+      tCont = tCont.filter((task) => task.index !== index);
+      change = true;
+      i -= 1;
     }
   }
   return tCont;
-}
+};
 
-export const modifyTask = (taskInput) => {
+export const deleteCompletedTasks = (checkboxes, tasksContainer) => {
+  const tasksInnerContainer = document.querySelector('.task-inner-container');
+  const tasks = tasksInnerContainer.children;
+  let tCont = tasksContainer;
+
+  checkboxes.forEach((box) => {
+    if (box.checked) {
+      for (let i = 0; i < tasks.length; i += 1) {
+        if (tasks[i] === box.parentElement) {
+          tCont = deleteTask(i, tCont);
+          tasks[i].remove();
+          break;
+        }
+      }
+    }
+  });
+  return tCont;
+};
+
+export const modifyTask = (taskInput, tasksContainer) => {
   const taskChanged = taskInput.parentElement;
   const taskList = taskChanged.parentElement.children;
 
-  for (let i = 0; i < taskList.length; i++) {
-    if (taskList[i] == taskChanged) {
+  for (let i = 0; i < taskList.length; i += 1) {
+    if (taskList[i] === taskChanged) {
       tasksContainer[i].description = taskInput.value;
     }
   }
   return tasksContainer;
-}
+};

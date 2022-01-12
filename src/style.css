@@ -30,7 +30,7 @@
 
 .reload-icon {
   padding: 20px;
-  margin: 0px !important;
+  margin: 0 !important;
 }
 
 .task-form {
@@ -40,7 +40,7 @@
   height: 100%;
   width: 100%;
   font-style: italic;
-  padding: 15px 0px 15px 20px;
+  padding: 15px 0 15px 20px;
 }
 
 .task-inner-container {
@@ -59,7 +59,7 @@
 }
 
 .focus-task {
-  background-color: #FFFEC3;
+  background-color: #fffec3;
 }
 
 .check-box {
@@ -71,7 +71,7 @@
 
 .description {
   margin: 0;
-  padding: 20px 0px;
+  padding: 20px 0;
   flex-grow: 1;
   font-family: 'Helvetica', 'Arial', sans-serif;
   font-size: 18px;
@@ -109,6 +109,6 @@
   cursor: pointer;
 }
 
-input[type="text"] { 
+input[type="text"] {
   outline: none;
 }

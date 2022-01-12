@@ -2,7 +2,7 @@
 
 > This project is an attemp at recreating [this](https://web.archive.org/web/20180320194056/http://www.getminimalist.com:80/) page. Using Webpack. This project created for the sake of learning.
 
-![screenshot](./app_screenshot.png)
+![screenshot](./project_screenshot.png)
 
 ## Built With
 

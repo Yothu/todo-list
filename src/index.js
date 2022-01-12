@@ -1,43 +1,46 @@
 import './style.css';
-import checkIcon from './check.png';
-import boxIcon from './blank-check-box.png';
 import moreIcon from './more.png';
 import reloadIcon from './reload.png';
 import enterIcon from './enter.png';
+import {
+  getTasksLocalStorage, addTask, deleteCompletedTasks, setTasksLocalStorage, modifyTask,
+} from './crud-module';
 
-class Task {
-  constructor(description, completed, index) {
-    this.description = description;
-    this.completed = completed;
-    this.index = index;
-  }
-}
+let tasksContainer = getTasksLocalStorage();
 
-const createTaskHTML = (description, status) => {
+const createTaskHTML = (description) => {
   const tasksInnerContainer = document.querySelector('.task-inner-container');
   const taskContainer = document.createElement('li');
   taskContainer.classList.add('task');
 
-  const statusIcon = new Image();
-  if (status) {
-    statusIcon.src = checkIcon;
-    statusIcon.setAttribute('alt', 'check-icon');
-  } else {
-    statusIcon.src = boxIcon;
-    statusIcon.setAttribute('alt', 'checkbox-icon');
-  }
-  statusIcon.classList.add('check-box');
-  taskContainer.appendChild(statusIcon);
+  const checkbox = document.createElement('input');
+  checkbox.setAttribute('type', 'checkbox');
+  checkbox.classList.add('check-box', 'statusBox');
+  taskContainer.appendChild(checkbox);
 
-  const descriptionContainer = document.createElement('p');
+  const descriptionContainer = document.createElement('input');
+  descriptionContainer.setAttribute('type', 'text');
   descriptionContainer.classList.add('description');
-  descriptionContainer.appendChild(document.createTextNode(`${description}`));
+  descriptionContainer.value = description;
   taskContainer.appendChild(descriptionContainer);
+
+  descriptionContainer.addEventListener('change', () => {
+    tasksContainer = modifyTask(descriptionContainer, tasksContainer);
+    setTasksLocalStorage(tasksContainer);
+  });
+
+  descriptionContainer.addEventListener('focus', () => {
+    taskContainer.classList.toggle('focus-task');
+  });
+
+  descriptionContainer.addEventListener('blur', () => {
+    taskContainer.classList.toggle('focus-task');
+  });
 
   const menuIcon = new Image();
   menuIcon.src = moreIcon;
   menuIcon.setAttribute('alt', 'menu-icon');
-  menuIcon.classList.add('more-icon', 'check-box');
+  menuIcon.classList.add('more-icon');
   taskContainer.appendChild(menuIcon);
 
   tasksInnerContainer.appendChild(taskContainer);
@@ -48,16 +51,6 @@ const displayTasks = (array) => {
     createTaskHTML(array[i].description, array[i].completed);
   }
 };
-
-let tasksContainer = [
-  new Task('desc1', false, 1),
-  new Task('desc4', false, 4),
-  new Task('desc7', false, 7),
-  new Task('desc2', false, 2),
-  new Task('desc3', false, 3),
-  new Task('desc5', false, 5),
-  new Task('desc6', false, 6),
-];
 
 const upwardOrderArray = (array) => {
   for (let i = 0; i < array.length - 1; i += 1) {
@@ -74,6 +67,7 @@ const setReloadIcon = () => {
   const formContainer = document.querySelector('.title-container');
   const reIcon = new Image();
   reIcon.src = reloadIcon;
+  reIcon.setAttribute('id', 'reloadButton');
   reIcon.classList.add('check-box', 'reload-icon');
   reIcon.setAttribute('alt', 'reload-icon');
   formContainer.appendChild(reIcon);
@@ -83,6 +77,7 @@ const setEnterIcon = () => {
   const formContainer = document.querySelector('.form-container');
   const enIcon = new Image();
   enIcon.src = enterIcon;
+  enIcon.setAttribute('id', 'enterForm');
   enIcon.classList.add('check-box', 'reload-icon');
   enIcon.setAttribute('alt', 'enter-icon');
   formContainer.appendChild(enIcon);
@@ -90,8 +85,30 @@ const setEnterIcon = () => {
 
 setEnterIcon();
 setReloadIcon();
-tasksContainer = upwardOrderArray(tasksContainer);
 
 window.onload = () => {
-  displayTasks(tasksContainer);
+  if (tasksContainer != null) {
+    tasksContainer = upwardOrderArray(tasksContainer);
+    displayTasks(tasksContainer);
+  } else {
+    tasksContainer = [];
+  }
 };
+
+const enterButton = document.getElementById('enterForm');
+const clearButton = document.getElementById('clearButton');
+
+enterButton.addEventListener('click', () => {
+  const newDescription = document.getElementById('taskForm').value;
+  const newTask = addTask(newDescription, tasksContainer);
+  createTaskHTML(newTask.description);
+  document.getElementById('taskForm').value = '';
+});
+
+clearButton.addEventListener('click', () => {
+  const checkBoxes = document.querySelectorAll('.statusBox');
+
+  tasksContainer = deleteCompletedTasks(checkBoxes, tasksContainer);
+
+  setTasksLocalStorage(tasksContainer);
+});

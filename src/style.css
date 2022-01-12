@@ -9,7 +9,6 @@
 }
 
 .title-container {
-  padding: 5px 20px;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #ecebea;
@@ -18,15 +17,20 @@
 .tasks-container-title {
   font-size: 18px;
   font-family: 'Helvetica', 'Arial', sans-serif;
+  margin: 0;
+  padding: 20px;
+  user-select: none;
 }
 
 .form-container {
-  padding: 15px 20px;
+  /* padding: 15px 20px; */
   display: flex;
+  align-items: center;
 }
 
 .reload-icon {
-  margin-right: 0 !important;
+  padding: 20px;
+  margin: 0 !important;
 }
 
 .task-form {
@@ -36,6 +40,7 @@
   height: 100%;
   width: 100%;
   font-style: italic;
+  padding: 15px 0 15px 20px;
 }
 
 .task-inner-container {
@@ -53,22 +58,38 @@
   border-bottom: 1px solid #ecebea;
 }
 
+.focus-task {
+  background-color: #fffec3;
+}
+
 .check-box {
   width: 20px;
   height: 20px;
   margin: auto 20px;
+  cursor: pointer;
 }
 
 .description {
-  margin-left: 0;
-  margin-right: 0;
+  margin: 0;
+  padding: 20px 0;
   flex-grow: 1;
   font-family: 'Helvetica', 'Arial', sans-serif;
   font-size: 18px;
+  border: none;
+  background-color: transparent;
+}
+
+.complete-task-description {
+  text-decoration: line-through;
+  color: #a9a9a9;
 }
 
 .more-icon {
   transform: rotate(90deg);
+  width: 20px;
+  height: 20px;
+  padding: 20px;
+  cursor: pointer;
 }
 
 .clear-container {
@@ -80,7 +101,14 @@
 
 .clear-text {
   margin: 0;
-  color: #a9a9a9;
+  color: black;
   font-family: 'Helvetica', 'Arial', sans-serif;
   font-size: 18px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="text"] {
+  outline: none;
 }

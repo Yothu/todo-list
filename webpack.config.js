@@ -4,8 +4,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    index: './src/index.js',
-    crud: './src/crud-module.js',
+    index: {
+      import: './src/index.js',
+      dependOn: 'shared',
+    },
+    crud: {
+      import: './src/crud-module.js',
+      dependOn: 'shared',
+    },
+    shared: 'lodash',
   },
   devServer: {
     static: './dist',

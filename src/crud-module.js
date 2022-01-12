@@ -1,4 +1,3 @@
-console.log('CRUD-MODULE START');
 import {Task, tasksContainer, createTaskHTML} from './index';
 
 export const setTasksLocalStorage = (tasksContainer) => {
@@ -23,22 +22,34 @@ export const addTask = (description) => {
 export const deleteCompletedTasks = (checkboxes) => {
   const tasksInnerContainer = document.querySelector('.task-inner-container');
   const tasks = tasksInnerContainer.children;
+  let tCont = tasksContainer;
 
   for (const box of checkboxes) {
     if (box.checked) {
       for (let i = 0; i < tasks.length; i += 1) {
         if (tasks[i] == box.parentElement) {
+          tCont = deleteTask(i, tCont);
           tasks[i].remove();
-          deleteTask(i);
           break;
         }
       }
     }
   }
+  return tCont;
 }
 
-export const deleteTask = (index) => {
-  
+export const deleteTask = (index, tCont) => {
+  let change = false;
+  for (let i = 0; i < tCont.length; i += 1) {
+    if (change) {
+      tCont[i].index -= 1;
+    } else {
+      if (i == index) {
+        tCont = tCont.filter((task) => task.index !== index);
+        change = true;
+        i -= 1;
+      }
+    }
+  }
+  return tCont;
 }
-
-console.log('CRUD-MODULE END');

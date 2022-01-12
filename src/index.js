@@ -2,7 +2,7 @@ import './style.css';
 import moreIcon from './more.png';
 import reloadIcon from './reload.png';
 import enterIcon from './enter.png';
-import {getTasksLocalStorage, addTask, deleteCompletedTasks} from './crud-module';
+import {getTasksLocalStorage, addTask, deleteCompletedTasks, setTasksLocalStorage} from './crud-module';
 
 export class Task {
   constructor(description, completed = false, index) {
@@ -82,10 +82,7 @@ window.onload = () => {
   if (tasksContainer != null) {
     tasksContainer = upwardOrderArray(tasksContainer);
     displayTasks(tasksContainer);
-    console.log('NOT NULL');
-    console.log(tasksContainer);
   } else {
-    console.log('NULL');
     tasksContainer = [];
   }
 };
@@ -104,11 +101,10 @@ enterButton.addEventListener('click', () => {
   const newDescription = document.getElementById('taskForm').value;
   addTask(newDescription);
   document.getElementById('taskForm').value = "";
-  console.log('tasksContainer', tasksContainer);
 });
 
 clearButton.addEventListener('click', () => {
   const checkBoxes = document.querySelectorAll('.statusBox');
-  deleteCompletedTasks(checkBoxes);
-  // getCompletedTasks(checkBoxes);
+  tasksContainer = deleteCompletedTasks(checkBoxes);
+  setTasksLocalStorage(tasksContainer);
 });

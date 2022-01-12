@@ -58,6 +58,10 @@
   border-bottom: 1px solid #ecebea;
 }
 
+.focus-task {
+  background-color: #FFFEC3;
+}
+
 .check-box {
   width: 20px;
   height: 20px;
@@ -71,6 +75,13 @@
   flex-grow: 1;
   font-family: 'Helvetica', 'Arial', sans-serif;
   font-size: 18px;
+  border: none;
+  background-color: transparent;
+}
+
+.complete-task-description {
+  text-decoration: line-through;
+  color: #a9a9a9;
 }
 
 .more-icon {
@@ -78,6 +89,7 @@
   width: 20px;
   height: 20px;
   padding: 20px;
+  cursor: pointer;
 }
 
 .clear-container {
@@ -89,11 +101,14 @@
 
 .clear-text {
   margin: 0;
-  color: #a9a9a9;
+  color: black;
   font-family: 'Helvetica', 'Arial', sans-serif;
   font-size: 18px;
-  text-decoration: none;
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+input[type="text"] { 
+  outline: none;
 }

@@ -53,3 +53,15 @@ export const deleteTask = (index, tCont) => {
   }
   return tCont;
 }
+
+export const modifyTask = (taskInput) => {
+  const taskChanged = taskInput.parentElement;
+  const taskList = taskChanged.parentElement.children;
+
+  for (let i = 0; i < taskList.length; i++) {
+    if (taskList[i] == taskChanged) {
+      tasksContainer[i].description = taskInput.value;
+    }
+  }
+  return tasksContainer;
+}

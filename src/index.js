@@ -2,7 +2,7 @@ import './style.css';
 import moreIcon from './more.png';
 import reloadIcon from './reload.png';
 import enterIcon from './enter.png';
-import {getTasksLocalStorage, addTask, deleteCompletedTasks, setTasksLocalStorage} from './crud-module';
+import {getTasksLocalStorage, addTask, deleteCompletedTasks, setTasksLocalStorage, modifyTask} from './crud-module';
 
 export class Task {
   constructor(description, completed = false, index) {
@@ -22,10 +22,24 @@ export const createTaskHTML = (description) => {
   checkbox.classList.add('check-box', 'statusBox');
   taskContainer.appendChild(checkbox);
 
-  const descriptionContainer = document.createElement('p');
+  const descriptionContainer = document.createElement('input');
+  descriptionContainer.setAttribute('type', 'text');
   descriptionContainer.classList.add('description');
-  descriptionContainer.appendChild(document.createTextNode(`${description}`));
+  descriptionContainer.value = description;
   taskContainer.appendChild(descriptionContainer);
+
+  descriptionContainer.addEventListener('change', () => {
+    tasksContainer = modifyTask(descriptionContainer);
+    setTasksLocalStorage(tasksContainer);
+  });
+
+  descriptionContainer.addEventListener('focus', () => {
+    taskContainer.classList.toggle('focus-task');
+  });
+
+  descriptionContainer.addEventListener('blur', () => {
+    taskContainer.classList.toggle('focus-task');
+  });
 
   const menuIcon = new Image();
   menuIcon.src = moreIcon;

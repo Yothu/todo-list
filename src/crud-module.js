@@ -10,7 +10,12 @@ export const setTasksLocalStorage = (tasksContainer) => {
   localStorage.setItem('tasksContainer', JSON.stringify(tasksContainer));
 };
 
-export const getTasksLocalStorage = () => JSON.parse(localStorage.getItem('tasksContainer'));
+export const getTasksLocalStorage = () => {
+  if (localStorage.getItem('tasksContainer') != null) {
+    return JSON.parse(localStorage.getItem('tasksContainer'));
+  }
+  return [];
+};
 
 export const addTask = (description, tasksContainer) => {
   const newTask = new Task(description, false, tasksContainer.length);
@@ -33,6 +38,32 @@ export const deleteTask = (index, tCont) => {
   return tCont;
 };
 
+export const deleteSelectedTask = (taskToRemove, tasksContainer) => {
+  const tasksCo = taskToRemove.parentElement;
+  const tasksList = tasksCo.children;
+
+  for (let i = 0; i < tasksList.length; i += 1) {
+    if (tasksList[i] === taskToRemove) {
+      tasksContainer = deleteTask(i, tasksContainer);
+      tasksList[i].remove();
+      break;
+    }
+  }
+  return tasksContainer;
+};
+
+export const modifyTask = (taskInput, tasksContainer) => {
+  const taskChanged = taskInput.parentElement;
+  const taskList = taskChanged.parentElement.children;
+
+  for (let i = 0; i < taskList.length; i += 1) {
+    if (taskList[i] === taskChanged) {
+      tasksContainer[i].description = taskInput.value;
+    }
+  }
+  return tasksContainer;
+};
+
 export const deleteCompletedTasks = (checkboxes, tasksContainer) => {
   const tasksInnerContainer = document.querySelector('.task-inner-container');
   const tasks = tasksInnerContainer.children;
@@ -50,16 +81,4 @@ export const deleteCompletedTasks = (checkboxes, tasksContainer) => {
     }
   });
   return tCont;
-};
-
-export const modifyTask = (taskInput, tasksContainer) => {
-  const taskChanged = taskInput.parentElement;
-  const taskList = taskChanged.parentElement.children;
-
-  for (let i = 0; i < taskList.length; i += 1) {
-    if (taskList[i] === taskChanged) {
-      tasksContainer[i].description = taskInput.value;
-    }
-  }
-  return tasksContainer;
 };

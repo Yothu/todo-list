@@ -2,13 +2,20 @@ import './style.css';
 import moreIcon from './more.png';
 import reloadIcon from './reload.png';
 import enterIcon from './enter.png';
+import deleteIcon from './delete.png';
+import modifyStatus from './status-module';
 import {
-  getTasksLocalStorage, addTask, deleteCompletedTasks, setTasksLocalStorage, modifyTask,
+  getTasksLocalStorage,
+  addTask,
+  setTasksLocalStorage,
+  modifyTask,
+  deleteSelectedTask,
+  deleteCompletedTasks,
 } from './crud-module';
 
 let tasksContainer = getTasksLocalStorage();
 
-const createTaskHTML = (description) => {
+const createTaskHTML = (description, status = false) => {
   const tasksInnerContainer = document.querySelector('.task-inner-container');
   const taskContainer = document.createElement('li');
   taskContainer.classList.add('task');
@@ -24,17 +31,20 @@ const createTaskHTML = (description) => {
   descriptionContainer.value = description;
   taskContainer.appendChild(descriptionContainer);
 
-  descriptionContainer.addEventListener('change', () => {
-    tasksContainer = modifyTask(descriptionContainer, tasksContainer);
+  checkbox.addEventListener('change', () => {
+    tasksContainer = modifyStatus(checkbox.parentElement, tasksContainer);
+    descriptionContainer.classList.toggle('complete');
     setTasksLocalStorage(tasksContainer);
   });
 
-  descriptionContainer.addEventListener('focus', () => {
-    taskContainer.classList.toggle('focus-task');
-  });
+  if (status) {
+    checkbox.checked = true;
+    descriptionContainer.classList.add('complete');
+  }
 
-  descriptionContainer.addEventListener('blur', () => {
-    taskContainer.classList.toggle('focus-task');
+  descriptionContainer.addEventListener('change', () => {
+    tasksContainer = modifyTask(descriptionContainer, tasksContainer);
+    setTasksLocalStorage(tasksContainer);
   });
 
   const menuIcon = new Image();
@@ -42,6 +52,30 @@ const createTaskHTML = (description) => {
   menuIcon.setAttribute('alt', 'menu-icon');
   menuIcon.classList.add('more-icon');
   taskContainer.appendChild(menuIcon);
+
+  const delIcon = new Image();
+  delIcon.src = deleteIcon;
+  delIcon.setAttribute('id', 'deleteTask');
+  delIcon.classList.add('check-box', 'reload-icon', 'delete-icon', 'hide');
+  delIcon.setAttribute('alt', 'delete-icon');
+  taskContainer.appendChild(delIcon);
+
+  descriptionContainer.addEventListener('focus', () => {
+    taskContainer.classList.toggle('focus-task');
+    menuIcon.classList.toggle('hide');
+    delIcon.classList.toggle('hide');
+  });
+
+  descriptionContainer.addEventListener('blur', () => {
+    taskContainer.classList.toggle('focus-task');
+    menuIcon.classList.toggle('hide');
+    delIcon.classList.toggle('hide');
+  });
+
+  delIcon.addEventListener('click', () => {
+    tasksContainer = deleteSelectedTask(delIcon.parentElement, tasksContainer);
+    setTasksLocalStorage(tasksContainer);
+  });
 
   tasksInnerContainer.appendChild(taskContainer);
 };
@@ -87,7 +121,7 @@ setEnterIcon();
 setReloadIcon();
 
 window.onload = () => {
-  if (tasksContainer != null) {
+  if (tasksContainer != null && tasksContainer.length > 0) {
     tasksContainer = upwardOrderArray(tasksContainer);
     displayTasks(tasksContainer);
   } else {
@@ -107,8 +141,6 @@ enterButton.addEventListener('click', () => {
 
 clearButton.addEventListener('click', () => {
   const checkBoxes = document.querySelectorAll('.statusBox');
-
   tasksContainer = deleteCompletedTasks(checkBoxes, tasksContainer);
-
   setTasksLocalStorage(tasksContainer);
 });

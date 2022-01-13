@@ -7,17 +7,7 @@
  * or disable the default devtool with "devtool: false".
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
-(self["webpackChunktodo_list"] = self["webpackChunktodo_list"] || []).push([["crud"],{
-
-/***/ "./src/crud-module.js":
-/*!****************************!*\
-  !*** ./src/crud-module.js ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Task\": () => (/* binding */ Task),\n/* harmony export */   \"setTasksLocalStorage\": () => (/* binding */ setTasksLocalStorage),\n/* harmony export */   \"getTasksLocalStorage\": () => (/* binding */ getTasksLocalStorage),\n/* harmony export */   \"addTask\": () => (/* binding */ addTask),\n/* harmony export */   \"deleteSelectedTask\": () => (/* binding */ deleteSelectedTask),\n/* harmony export */   \"modifyTask\": () => (/* binding */ modifyTask)\n/* harmony export */ });\n/* harmony import */ var _status_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./status-module */ \"./src/status-module.js\");\n\n\nclass Task {\n  constructor(description, completed = false, index) {\n    this.description = description;\n    this.completed = completed;\n    this.index = index;\n  }\n}\n\nconst setTasksLocalStorage = (tasksContainer) => {\n  localStorage.setItem('tasksContainer', JSON.stringify(tasksContainer));\n};\n\nconst getTasksLocalStorage = () => {\n  if (localStorage.getItem('tasksContainer') != null) {\n    return JSON.parse(localStorage.getItem('tasksContainer'));\n  }\n  return [];\n};\n\nconst addTask = (description, tasksContainer) => {\n  const newTask = new Task(description, false, tasksContainer.length);\n  tasksContainer.push(newTask);\n  setTasksLocalStorage(tasksContainer);\n  return newTask;\n};\n\nconst deleteSelectedTask = (taskToRemove, tasksContainer) => {\n  const tasksCo = taskToRemove.parentElement;\n  const tasksList = tasksCo.children;\n\n  for (let i = 0; i < tasksList.length; i += 1) {\n    if (tasksList[i] === taskToRemove) {\n      tasksContainer = (0,_status_module__WEBPACK_IMPORTED_MODULE_0__.deleteTask)(i, tasksContainer);\n      tasksList[i].remove();\n      break;\n    }\n  }\n  return tasksContainer;\n};\n\nconst modifyTask = (taskInput, tasksContainer) => {\n  const taskChanged = taskInput.parentElement;\n  const taskList = taskChanged.parentElement.children;\n\n  for (let i = 0; i < taskList.length; i += 1) {\n    if (taskList[i] === taskChanged) {\n      tasksContainer[i].description = taskInput.value;\n    }\n  }\n  return tasksContainer;\n};\n\n\n//# sourceURL=webpack://todo-list/./src/crud-module.js?");
-
-/***/ }),
+(self["webpackChunktodo_list"] = self["webpackChunktodo_list"] || []).push([["status"],{
 
 /***/ "./src/status-module.js":
 /*!******************************!*\
@@ -32,6 +22,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ var __webpack_exports__ = (__webpack_exec__("./src/crud-module.js"));
+/******/ var __webpack_exports__ = (__webpack_exec__("./src/status-module.js"));
 /******/ }
 ]);

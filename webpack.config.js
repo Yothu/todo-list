@@ -12,6 +12,11 @@ module.exports = {
       import: './src/crud-module.js',
       dependOn: 'shared',
     },
+    status: {
+      import: './src/status-module.js',
+      dependOn: 'shared',
+
+    },
     shared: 'lodash',
   },
   devServer: {

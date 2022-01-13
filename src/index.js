@@ -3,13 +3,14 @@ import moreIcon from './more.png';
 import reloadIcon from './reload.png';
 import enterIcon from './enter.png';
 import deleteIcon from './delete.png';
-import { modifyStatus, deleteCompletedTasks } from './status-module';
+import modifyStatus from './status-module';
 import {
   getTasksLocalStorage,
   addTask,
   setTasksLocalStorage,
   modifyTask,
   deleteSelectedTask,
+  deleteCompletedTasks,
 } from './crud-module';
 
 let tasksContainer = getTasksLocalStorage();

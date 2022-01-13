@@ -1,5 +1,3 @@
-import { deleteTask } from './status-module';
-
 export class Task {
   constructor(description, completed = false, index) {
     this.description = description;
@@ -26,6 +24,20 @@ export const addTask = (description, tasksContainer) => {
   return newTask;
 };
 
+export const deleteTask = (index, tCont) => {
+  let change = false;
+  for (let i = 0; i < tCont.length; i += 1) {
+    if (change) {
+      tCont[i].index -= 1;
+    } else if (i === index) {
+      tCont = tCont.filter((task) => task.index !== index);
+      change = true;
+      i -= 1;
+    }
+  }
+  return tCont;
+};
+
 export const deleteSelectedTask = (taskToRemove, tasksContainer) => {
   const tasksCo = taskToRemove.parentElement;
   const tasksList = tasksCo.children;
@@ -50,4 +62,23 @@ export const modifyTask = (taskInput, tasksContainer) => {
     }
   }
   return tasksContainer;
+};
+
+export const deleteCompletedTasks = (checkboxes, tasksContainer) => {
+  const tasksInnerContainer = document.querySelector('.task-inner-container');
+  const tasks = tasksInnerContainer.children;
+  let tCont = tasksContainer;
+
+  checkboxes.forEach((box) => {
+    if (box.checked) {
+      for (let i = 0; i < tasks.length; i += 1) {
+        if (tasks[i] === box.parentElement) {
+          tCont = deleteTask(i, tCont);
+          tasks[i].remove();
+          break;
+        }
+      }
+    }
+  });
+  return tCont;
 };

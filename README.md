@@ -4,6 +4,10 @@
 
 ![screenshot](./project_screenshot.png)
 
+## Live Demo
+
+Check the [live version](https://yothu.github.io/todo-list/dist/) of this project!
+
 ## Built With
 
 - HTML

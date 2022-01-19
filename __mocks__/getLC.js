@@ -5,4 +5,4 @@ const setTasksLocalStorage = (task) => {
   return result;
 };
 
-export default { setTasksLocalStorage };
+export default setTasksLocalStorage;

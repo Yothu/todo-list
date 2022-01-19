@@ -5,8 +5,9 @@
 import { addTask, deleteSelectedTask } from '../src/crud-module';
 import setTasksLocalStorage from '../src/getLC';
 
-/* eslint-disable-next-line global-require */
+/* eslint-disable global-require */
 jest.mock('../src/getLC', () => require('../__mocks__/getLC'));
+/* eslint-enable global-require */
 
 describe('Add task function tests', () => {
   test('added one new task to empty task container', () => {

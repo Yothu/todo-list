@@ -1,12 +1,26 @@
-import { addTask } from './crud-module';
+import { addTask, deleteSelectedTask } from './crud-module';
 //add and remove functions
 
-
-test('add task to list', () => {
-    const task = {
-        description: 'abc'
-    }
+describe('Add task function tests', () => {
+  test('New task description inserted in task container is abc', () => {
+    // ARRANGE
+    const task = { description: 'abc' };
     const tasksContainer = [];
+    
+    // ACT
     const result = addTask(task.description, tasksContainer);
-    expect(result).toEqual({ description: 'abc', completed: false, index: 0 });
+    
+    // ASSERT
+    expect(result.description).toBe('abc');
+  });
 });
+
+describe('Delete task function tests', () => {
+  
+});
+
+// test('delete task from list', () => {
+//   const 
+//   const tasksContainer = [];
+//   const result = deleteSelectedTask(taskToRemove, tasksContainer);
+// });

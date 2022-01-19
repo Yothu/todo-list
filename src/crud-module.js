@@ -20,7 +20,7 @@ export const getTasksLocalStorage = () => {
 export const addTask = (description, tasksContainer) => {
   const newTask = new Task(description, false, tasksContainer.length);
   tasksContainer.push(newTask);
-  setTasksLocalStorage(tasksContainer);
+  // setTasksLocalStorage(tasksContainer);
   return newTask;
 };
 

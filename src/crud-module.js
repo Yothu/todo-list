@@ -8,10 +8,6 @@ export class Task {
   }
 }
 
-// export const setTasksLocalStorage = (tasksContainer) => {
-  // localStorage.setItem('tasksContainer', JSON.stringify(tasksContainer));
-// };
-
 export const getTasksLocalStorage = () => {
   if (localStorage.getItem('tasksContainer') != null) {
     return JSON.parse(localStorage.getItem('tasksContainer'));

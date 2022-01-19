@@ -1,3 +1,6 @@
-export const setTasksLocalStorage = (tasksContainer) => {
-  console.log('MOCK LOCAL STAORAGE:', tasksContainer);
+export const setTasksLocalStorage = (task) => {
+  const mockTasksContainer = [];
+  mockTasksContainer.push(...task)
+  const result = mockTasksContainer;
+  return result;
 };

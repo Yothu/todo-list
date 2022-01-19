@@ -3,7 +3,7 @@
  */
 
 import { addTask, deleteSelectedTask } from '../src/crud-module';
-//add and remove functions
+import { setTasksLocalStorage } from '../src/getLC';
 jest.mock('../src/getLC', () => require('../__mocks__/getLC'));
 
 describe('Add task function tests', () => {
@@ -29,6 +29,18 @@ describe('Add task function tests', () => {
     
     // ASSERT
     expect(result.description).toBe('abc');
+  });
+
+  test('add new task using setTasksLocalStorage mock function', () => {
+    //ARRANGE
+    const task = [{ description: 'abc' }];
+    let tasksContainer = [];
+
+    //ACT
+    tasksContainer = setTasksLocalStorage(task);
+
+    //ASSERT
+    expect(tasksContainer.length).toBe(1);
   });
 });
 

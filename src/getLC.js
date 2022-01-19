@@ -3,4 +3,3 @@ const setTasksLocalStorage = (tasksContainer) => {
 };
 
 export default setTasksLocalStorage;
-

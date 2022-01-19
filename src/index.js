@@ -1,5 +1,4 @@
 import './style.css';
-import moreIcon from './more.png';
 import reloadIcon from './reload.png';
 import enterIcon from './enter.png';
 import deleteIcon from './delete.png';
@@ -48,29 +47,19 @@ const createTaskHTML = (description, status = false) => {
     setTasksLocalStorage(tasksContainer);
   });
 
-  const menuIcon = new Image();
-  menuIcon.src = moreIcon;
-  menuIcon.setAttribute('alt', 'menu-icon');
-  menuIcon.classList.add('more-icon');
-  taskContainer.appendChild(menuIcon);
-
   const delIcon = new Image();
   delIcon.src = deleteIcon;
   delIcon.setAttribute('id', 'deleteTask');
-  delIcon.classList.add('check-box', 'reload-icon', 'delete-icon', 'hide');
+  delIcon.classList.add('check-box', 'reload-icon', 'delete-icon');
   delIcon.setAttribute('alt', 'delete-icon');
   taskContainer.appendChild(delIcon);
 
   descriptionContainer.addEventListener('focus', () => {
     taskContainer.classList.toggle('focus-task');
-    menuIcon.classList.toggle('hide');
-    delIcon.classList.toggle('hide');
   });
 
   descriptionContainer.addEventListener('blur', () => {
     taskContainer.classList.toggle('focus-task');
-    menuIcon.classList.toggle('hide');
-    delIcon.classList.toggle('hide');
   });
 
   delIcon.addEventListener('click', () => {

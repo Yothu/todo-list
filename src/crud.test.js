@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { addTask, deleteSelectedTask } from './crud-module';
 //add and remove functions
 
@@ -28,11 +32,26 @@ describe('Add task function tests', () => {
 });
 
 describe('Delete task function tests', () => {
-  
+  test('length of taskContainer after deleting its only task, is ZERO', () => {
+    
+    //ARRANGE
+    document.body.innerHTML =
+      `<ul class='task-inner-container'>
+          <li class='task'></li>
+      </ul>`;
+    const tasksContainer = [
+      {
+        description: 'abc',
+        completed: false,
+        index: 0,
+      }
+    ]
+    const taskToRemove = document.querySelector('.task');
+    
+    //ACT
+    const result = deleteSelectedTask(taskToRemove, tasksContainer);
+    
+    //ASSERT
+    expect(result.length).toBe(0);
+  });
 });
-
-// test('delete task from list', () => {
-//   const 
-//   const tasksContainer = [];
-//   const result = deleteSelectedTask(taskToRemove, tasksContainer);
-// });

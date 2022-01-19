@@ -1,4 +1,4 @@
 export const setTasksLocalStorage = (tasksContainer) => {
-  console.log('getlc AAAAAAAA');
+  console.log('ORIGINAL FUNCTION');
   localStorage.setItem('tasksContainer', JSON.stringify(tasksContainer));
 };

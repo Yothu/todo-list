@@ -25,7 +25,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"setTasksLocalStorage\": () => (/* binding */ setTasksLocalStorage)\n/* harmony export */ });\nconst setTasksLocalStorage = (tasksContainer) => {\n  console.log('getlc AAAAAAAA');\n  localStorage.setItem('tasksContainer', JSON.stringify(tasksContainer));\n};\n\n\n//# sourceURL=webpack://todo-list/./src/getLC.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"setTasksLocalStorage\": () => (/* binding */ setTasksLocalStorage)\n/* harmony export */ });\nconst setTasksLocalStorage = (tasksContainer) => {\n  console.log('ORIGINAL FUNCTION');\n  localStorage.setItem('tasksContainer', JSON.stringify(tasksContainer));\n};\n\n\n//# sourceURL=webpack://todo-list/./src/getLC.js?");
 
 /***/ })
 

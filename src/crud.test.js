@@ -4,8 +4,8 @@
 
 import { addTask, deleteSelectedTask } from './crud-module';
 //add and remove functions
-jest.mock('./getLC');
-
+// jest.mock('./getLC');
+jest.mock('./getLC', () => require('../__mocks__/getLC'));
 
 describe('Add task function tests', () => {
   test('added one new task to empty task container', () => {

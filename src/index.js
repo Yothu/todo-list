@@ -7,13 +7,12 @@ import modifyStatus from './status-module';
 import {
   getTasksLocalStorage,
   addTask,
-  // setTasksLocalStorage,
   modifyTask,
   deleteSelectedTask,
   deleteCompletedTasks,
 } from './crud-module';
 
-import { setTasksLocalStorage } from './getLC';
+import setTasksLocalStorage from './getLC';
 
 let tasksContainer = getTasksLocalStorage();
 

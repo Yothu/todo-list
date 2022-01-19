@@ -1,6 +1,8 @@
-export const setTasksLocalStorage = (task) => {
+const setTasksLocalStorage = (task) => {
   const mockTasksContainer = [];
-  mockTasksContainer.push(...task)
+  mockTasksContainer.push(...task);
   const result = mockTasksContainer;
   return result;
 };
+
+export default { setTasksLocalStorage };

@@ -2,10 +2,10 @@
  * @jest-environment jsdom
  */
 
-import { addTask, deleteSelectedTask } from './crud-module';
-import setTasksLocalStorage from './getLC';
+import { addTask, deleteSelectedTask } from '../crud-module';
+import setTasksLocalStorage from '../getLC';
 
-jest.mock('./getLC');
+jest.mock('../getLC');
 
 describe('Add task function tests', () => {
   test('added one new task to empty task container', () => {

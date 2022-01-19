@@ -1,3 +1,5 @@
+import { setTasksLocalStorage } from './getLC';
+
 export class Task {
   constructor(description, completed = false, index) {
     this.description = description;
@@ -6,9 +8,9 @@ export class Task {
   }
 }
 
-export const setTasksLocalStorage = (tasksContainer) => {
-  localStorage.setItem('tasksContainer', JSON.stringify(tasksContainer));
-};
+// export const setTasksLocalStorage = (tasksContainer) => {
+  // localStorage.setItem('tasksContainer', JSON.stringify(tasksContainer));
+// };
 
 export const getTasksLocalStorage = () => {
   if (localStorage.getItem('tasksContainer') != null) {
@@ -20,7 +22,7 @@ export const getTasksLocalStorage = () => {
 export const addTask = (description, tasksContainer) => {
   const newTask = new Task(description, false, tasksContainer.length);
   tasksContainer.push(newTask);
-  // setTasksLocalStorage(tasksContainer);
+  setTasksLocalStorage(tasksContainer);
   return newTask;
 };
 

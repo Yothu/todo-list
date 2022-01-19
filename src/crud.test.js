@@ -33,7 +33,6 @@ describe('Add task function tests', () => {
 
 describe('Delete task function tests', () => {
   test('length of taskContainer after deleting its only task, is ZERO', () => {
-    
     //ARRANGE
     document.body.innerHTML =
       `<ul class='task-inner-container'>

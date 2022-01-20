@@ -1,4 +1,4 @@
-import setTasksLocalStorage from './getLC';
+import setTasksLocalStorage from './setLS';
 
 export class Task {
   constructor(description, completed = false, index) {
@@ -7,13 +7,6 @@ export class Task {
     this.index = index;
   }
 }
-
-export const getTasksLocalStorage = () => {
-  if (localStorage.getItem('tasksContainer') != null) {
-    return JSON.parse(localStorage.getItem('tasksContainer'));
-  }
-  return [];
-};
 
 export const addTask = (description, tasksContainer) => {
   const newTask = new Task(description, false, tasksContainer.length);

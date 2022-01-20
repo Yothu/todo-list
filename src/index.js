@@ -4,14 +4,14 @@ import enterIcon from './enter.png';
 import deleteIcon from './delete.png';
 import modifyStatus from './status-module';
 import {
-  getTasksLocalStorage,
   addTask,
   modifyTask,
   deleteSelectedTask,
   deleteCompletedTasks,
 } from './crud-module';
 
-import setTasksLocalStorage from './getLC';
+import setTasksLocalStorage from './setLS';
+import getTasksLocalStorage from './getLS';
 
 let tasksContainer = getTasksLocalStorage();
 

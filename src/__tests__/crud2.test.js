@@ -83,5 +83,54 @@ describe('Modify description function tests', () => {
 });
 
 describe('Delete completed tasks function tests', () => {
-  
+  test('Delete the tasks from the tasksContainer that are checked from the document', () => {
+    // ARRANGE
+    document.body.innerHTML = `
+    <ul class='task-inner-container'>
+      <li class='task'>
+        <input type="checkbox" class="checkbox">
+        <input type="text">
+      </li>
+      <li class='task'>
+        <input type="checkbox" class="checkbox" checked>
+        <input type="text">
+      </li>
+      <li class='task'>
+        <input type="checkbox" class="checkbox">
+        <input type="text">
+      </li>
+      <li class='task'>
+        <input type="checkbox" class="checkbox" checked>
+        <input type="text">
+      </li>
+      <li class='task'>
+        <input type="checkbox" class="checkbox">
+        <input type="text">
+      </li>
+    </ul>`;
+
+    const tasksContainer = [
+      { description: 'abc', index: 0 },
+      { description: 'def', index: 1 },
+      { description: 'ghi', index: 2 },
+      { description: 'jkl', index: 3 },
+      { description: 'mno', index: 4 },
+    ];
+
+    const expectedResult = [
+      { description: 'abc', index: 0 },
+      { description: 'ghi', index: 1 },
+      { description: 'mno', index: 2 },
+    ];
+
+    const checkboxes = document.querySelectorAll('.checkbox');
+    // ACT
+    const result = deleteCompletedTasks(checkboxes, tasksContainer);
+    // ASSERT
+    expect(result).toStrictEqual(expectedResult);
+  });
+
+  test('should ', () => {
+    
+  });
 });

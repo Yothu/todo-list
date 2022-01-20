@@ -6,7 +6,7 @@ import modifyStatus from '../status-module';
 import { modifyTask, deleteCompletedTasks } from '../crud-module';
 
 describe('Modify Status function test', () => {
-  test('should ', () => {
+  test('Tasks with modify class have changed its status from false to true', () => {
     // ARRANGE
     document.body.innerHTML = `
     <ul class='task-inner-container'>
@@ -44,7 +44,42 @@ describe('Modify Status function test', () => {
 });
 
 describe('Modify description function tests', () => {
-  
+  test('Tasks with modify class have changed its description to xyz', () => {
+    // ARRANGE
+    document.body.innerHTML = `
+    <ul class='task-inner-container'>
+      <li class='task'>
+        <input type="checkbox">
+        <input type="text">
+      </li>
+      <li class='task'>
+        <input type="checkbox">
+        <input type="text">
+      </li>
+      <li class='task'>
+        <input type="checkbox">
+        <input type="text" class='modify'>
+      </li>
+    </ul>`;
+    const tasksContainer = [
+      { description: 'abc' },
+      { description: 'def' },
+      { description: 'ghi' },
+    ];
+
+    const expectedResult = [
+      { description: 'abc' },
+      { description: 'def' },
+      { description: 'xyz' },
+    ];
+
+    const taskToModify = document.querySelector('.modify');
+    taskToModify.value = 'xyz';
+    // ACT
+    const result = modifyTask(taskToModify, tasksContainer);
+    // ASSERT
+    expect(result).toStrictEqual(expectedResult);
+  });
 });
 
 describe('Delete completed tasks function tests', () => {

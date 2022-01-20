@@ -129,8 +129,4 @@ describe('Delete completed tasks function tests', () => {
     // ASSERT
     expect(result).toStrictEqual(expectedResult);
   });
-
-  test('should ', () => {
-    
-  });
 });

@@ -13,7 +13,6 @@ import {
 import setTasksLocalStorage from './setLS';
 import getTasksLocalStorage from './getLS';
 
-
 let tasksContainer = getTasksLocalStorage();
 
 const createTaskHTML = (description, status = false) => {

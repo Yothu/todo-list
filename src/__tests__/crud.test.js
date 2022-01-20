@@ -11,9 +11,9 @@ class LocalStorageMock {
     this.store = {};
   }
 
-  clear() {
-    this.store = {};
-  }
+  // clear() {
+  //   this.store = {};
+  // }
 
   getItem(key) {
     return this.store[key] || null;
@@ -23,16 +23,16 @@ class LocalStorageMock {
     this.store[key] = String(value);
   }
 
-  removeItem(key) {
-    delete this.store[key];
-  }
+  // removeItem(key) {
+  //   delete this.store[key];
+  // }
 }
 
 jest.mock('../setLS');
 jest.mock('../getLS');
 
 describe('Add task function tests', () => {
-  test('added one new task to empty task container', () => {
+  test('The length of an empty tasksContainer after adding a task is 1', () => {
     // ARRANGE
     const task = { description: 'abc' };
     const tasksContainer = [];
@@ -50,12 +50,12 @@ describe('Add task function tests', () => {
     // ASSERT
     expect(result.description).toBe('abc');
   });
-  
-  test('add new task using setTasksLocalStorage mock function', () => {
+
+  test('The length of the empty tasksContainer key in the local storage after saving a task is 1', () => {
     // ARRANGE
-    const task = [{ description: 'abc' }];
+    const tasksContainer = [{ description: 'abc', completed: true, index: 0 }];
     // ACT
-    setTasksLocalStorage(task);
+    setTasksLocalStorage(tasksContainer);
     const result = getTasksLocalStorage();
     // ASSERT
     expect(result.length).toBe(1);
@@ -63,7 +63,7 @@ describe('Add task function tests', () => {
 });
 
 describe('Delete task function tests', () => {
-  test('length of taskContainer after deleting its only task, is ZERO', () => {
+  test('The length of taskContainer after deleting its only task, is 0', () => {
     // ARRANGE
     document.body.innerHTML = `<ul class='task-inner-container'>
     <li class='task'></li>

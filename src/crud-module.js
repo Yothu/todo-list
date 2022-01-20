@@ -8,8 +8,6 @@ export class Task {
   }
 }
 
-
-
 export const addTask = (description, tasksContainer) => {
   const newTask = new Task(description, false, tasksContainer.length);
   tasksContainer.push(newTask);

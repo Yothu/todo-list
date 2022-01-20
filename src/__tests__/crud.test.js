@@ -3,7 +3,7 @@
 */
 
 import { addTask, deleteSelectedTask } from '../crud-module';
-import setTasksLocalStorage from '../getLC';
+import setTasksLocalStorage from '../setLS';
 
 class LocalStorageMock {
   constructor() {
@@ -27,7 +27,7 @@ class LocalStorageMock {
   }
 }
 
-jest.mock('../getLC');
+jest.mock('../setLS');
 
 describe('Add task function tests', () => {
   test('added one new task to empty task container', () => {

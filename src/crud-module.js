@@ -1,4 +1,4 @@
-import setTasksLocalStorage from './getLC';
+import setTasksLocalStorage from './setLS';
 
 export class Task {
   constructor(description, completed = false, index) {

@@ -11,7 +11,7 @@ import {
   deleteCompletedTasks,
 } from './crud-module';
 
-import setTasksLocalStorage from './getLC';
+import setTasksLocalStorage from './setLS';
 
 let tasksContainer = getTasksLocalStorage();
 

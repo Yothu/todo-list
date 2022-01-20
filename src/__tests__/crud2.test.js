@@ -44,7 +44,7 @@ describe('Modify Status function test', () => {
 });
 
 describe('Modify description function tests', () => {
-  test('Tasks with modify class have changed its description to xyz', () => {
+  test('Input text with modify class changes its parent task description to xyz', () => {
     // ARRANGE
     document.body.innerHTML = `
     <ul class='task-inner-container'>
@@ -73,10 +73,10 @@ describe('Modify description function tests', () => {
       { description: 'xyz' },
     ];
 
-    const taskToModify = document.querySelector('.modify');
-    taskToModify.value = 'xyz';
+    const inputThatModifies = document.querySelector('.modify');
+    inputThatModifies.value = 'xyz';
     // ACT
-    const result = modifyTask(taskToModify, tasksContainer);
+    const result = modifyTask(inputThatModifies, tasksContainer);
     // ASSERT
     expect(result).toStrictEqual(expectedResult);
   });

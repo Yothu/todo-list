@@ -4,6 +4,7 @@
 
 import { addTask, deleteSelectedTask } from '../crud-module';
 import setTasksLocalStorage from '../setLS';
+import getTasksLocalStorage from '../__mocks__/getLS';
 
 class LocalStorageMock {
   constructor() {
@@ -28,6 +29,7 @@ class LocalStorageMock {
 }
 
 jest.mock('../setLS');
+jest.mock('../getLS');
 
 describe('Add task function tests', () => {
   test('added one new task to empty task container', () => {
@@ -48,14 +50,15 @@ describe('Add task function tests', () => {
     // ASSERT
     expect(result.description).toBe('abc');
   });
+  
   test('add new task using setTasksLocalStorage mock function', () => {
     // ARRANGE
     const task = [{ description: 'abc' }];
-    let tasksContainer = [];
     // ACT
-    tasksContainer = setTasksLocalStorage(task);
+    setTasksLocalStorage(task);
+    const result = getTasksLocalStorage();
     // ASSERT
-    expect(tasksContainer.length).toBe(1);
+    expect(result.length).toBe(1);
   });
 });
 
@@ -81,5 +84,3 @@ describe('Delete task function tests', () => {
 });
 
 global.localStorage = new LocalStorageMock();
-
-// export { localStorage };

@@ -1,3 +1,5 @@
+import setTasksLocalStorage from './getLC';
+
 export class Task {
   constructor(description, completed = false, index) {
     this.description = description;
@@ -5,10 +7,6 @@ export class Task {
     this.index = index;
   }
 }
-
-export const setTasksLocalStorage = (tasksContainer) => {
-  localStorage.setItem('tasksContainer', JSON.stringify(tasksContainer));
-};
 
 export const getTasksLocalStorage = () => {
   if (localStorage.getItem('tasksContainer') != null) {

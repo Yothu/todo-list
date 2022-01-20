@@ -8,12 +8,7 @@ export class Task {
   }
 }
 
-export const getTasksLocalStorage = () => {
-  if (localStorage.getItem('tasksContainer') != null) {
-    return JSON.parse(localStorage.getItem('tasksContainer'));
-  }
-  return [];
-};
+
 
 export const addTask = (description, tasksContainer) => {
   const newTask = new Task(description, false, tasksContainer.length);
